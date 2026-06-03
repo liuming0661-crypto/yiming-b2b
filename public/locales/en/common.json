@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "products": "Products",
+    "cart": "Cart",
+    "orders": "Orders",
+    "account": "Account",
+    "logout": "Logout"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "companyName": "Company Name",
+    "country": "Country",
+    "contactName": "Contact Name",
+    "phone": "Phone",
+    "businessLicense": "Business License",
+    "uploadLicense": "Upload Business License",
+    "pending": "Your account is pending approval",
+    "pendingDesc": "We will notify you by email once your account is approved."
+  },
+  "product": {
+    "moq": "Min. Order Qty",
+    "priceTiers": "Price Tiers",
+    "addToCart": "Add to Cart",
+    "qty": "Quantity",
+    "units": "units",
+    "perUnit": "/ unit"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "total": "Total",
+    "checkout": "Proceed to Checkout",
+    "minOrder": "Minimum order is $500 USD"
+  },
+  "order": {
+    "status": {
+      "PENDING_PAYMENT": "Pending Payment",
+      "PAID": "Paid",
+      "PREPARING": "Preparing",
+      "SHIPPED": "Shipped",
+      "CUSTOMS": "In Customs",
+      "DELIVERED": "Delivered",
+      "CANCELLED": "Cancelled"
+    },
+    "paymentMethod": {
+      "STRIPE": "Credit Card",
+      "TT_WIRE": "Bank Transfer (TT)"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "search": "Search products..."
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "products": "المنتجات",
+    "cart": "السلة",
+    "orders": "الطلبات",
+    "account": "الحساب",
+    "logout": "تسجيل الخروج"
+  },
+  "auth": {
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "companyName": "اسم الشركة",
+    "country": "الدولة",
+    "contactName": "اسم جهة الاتصال",
+    "phone": "رقم الهاتف",
+    "businessLicense": "رخصة تجارية",
+    "uploadLicense": "رفع الرخصة التجارية",
+    "pending": "حسابك قيد المراجعة",
+    "pendingDesc": "سنُخطرك عبر البريد الإلكتروني فور الموافقة على حسابك."
+  },
+  "product": {
+    "moq": "الحد الأدنى للطلب",
+    "priceTiers": "شرائح الأسعار",
+    "addToCart": "أضف إلى السلة",
+    "qty": "الكمية",
+    "units": "وحدة",
+    "perUnit": "/ وحدة"
+  },
+  "cart": {
+    "title": "سلة التسوق",
+    "empty": "سلتك فارغة",
+    "total": "الإجمالي",
+    "checkout": "إتمام الطلب",
+    "minOrder": "الحد الأدنى للطلب 500 دولار أمريكي"
+  },
+  "order": {
+    "status": {
+      "PENDING_PAYMENT": "في انتظار الدفع",
+      "PAID": "مدفوع",
+      "PREPARING": "جاري التحضير",
+      "SHIPPED": "تم الشحن",
+      "CUSTOMS": "في الجمارك",
+      "DELIVERED": "تم التسليم",
+      "CANCELLED": "ملغى"
+    },
+    "paymentMethod": {
+      "STRIPE": "بطاقة ائتمان",
+      "TT_WIRE": "تحويل بنكي"
+    }
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "حدث خطأ ما",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "search": "ابحث عن منتجات..."
+  }
+}

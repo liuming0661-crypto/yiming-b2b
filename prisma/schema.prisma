@@ -1,0 +1,184 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id           String     @id @default(cuid())
+  firebaseUid  String     @unique
+  email        String     @unique
+  companyName  String
+  country      String
+  contactName  String
+  phone        String?
+  status       UserStatus @default(PENDING)
+  licenseImage String?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  addresses    Address[]
+  orders       Order[]
+
+  @@index([status])
+  @@index([country])
+}
+
+model Category {
+  id        String     @id @default(cuid())
+  nameEn    String
+  nameAr    String
+  nameZh    String?
+  slug      String     @unique
+  parentId  String?
+  sortOrder Int        @default(0)
+  parent    Category?  @relation("CategoryTree", fields: [parentId], references: [id])
+  children  Category[] @relation("CategoryTree")
+  products  Product[]
+}
+
+model Product {
+  id         String      @id @default(cuid())
+  sku        String      @unique
+  nameEn     String
+  nameAr     String
+  nameZh     String?
+  descEn     String?
+  descAr     String?
+  descZh     String?
+  categoryId String
+  moq        Int
+  priceTiers Json
+  images     String[]
+  specs      Json?
+  algoliaId  String?
+  isActive   Boolean     @default(true)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  orderItems OrderItem[]
+  category   Category    @relation(fields: [categoryId], references: [id])
+
+  @@index([categoryId])
+  @@index([isActive])
+}
+
+model Address {
+  id         String  @id @default(cuid())
+  userId     String
+  fullName   String
+  company    String?
+  line1      String
+  line2      String?
+  city       String
+  state      String?
+  postalCode String
+  country    String
+  isDefault  Boolean @default(false)
+  user       User    @relation(fields: [userId], references: [id])
+  orders     Order[]
+
+  @@index([userId])
+}
+
+model Order {
+  id              String        @id @default(cuid())
+  orderNumber     String        @unique
+  buyerId         String
+  shippingAddrId  String?
+  status          OrderStatus   @default(PENDING_PAYMENT)
+  paymentMethod   PaymentMethod
+  paymentStatus   PaymentStatus @default(UNPAID)
+  stripePaymentId String?
+  totalUsd        Decimal       @db.Decimal(10, 2)
+  notes           String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  buyer           User          @relation(fields: [buyerId], references: [id])
+  shippingAddr    Address?      @relation(fields: [shippingAddrId], references: [id])
+  items           OrderItem[]
+  payments        Payment[]
+  shipment        Shipment?
+
+  @@index([buyerId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model OrderItem {
+  id           String  @id @default(cuid())
+  orderId      String
+  productId    String
+  quantity     Int
+  unitPriceUsd Decimal @db.Decimal(10, 2)
+  subtotalUsd  Decimal @db.Decimal(10, 2)
+  order        Order   @relation(fields: [orderId], references: [id])
+  product      Product @relation(fields: [productId], references: [id])
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+model Payment {
+  id         String        @id @default(cuid())
+  orderId    String
+  method     PaymentMethod
+  amountUsd  Decimal       @db.Decimal(10, 2)
+  status     PaymentStatus
+  receiptUrl String?
+  stripeId   String?
+  verifiedAt DateTime?
+  verifiedBy String?
+  createdAt  DateTime      @default(now())
+  order      Order         @relation(fields: [orderId], references: [id])
+
+  @@index([orderId])
+}
+
+model Shipment {
+  id                String         @id @default(cuid())
+  orderId           String         @unique
+  trackingNumber    String?
+  carrier           String?
+  status            ShipmentStatus @default(PREPARING)
+  documents         Json?
+  estimatedDelivery DateTime?
+  updatedAt         DateTime       @updatedAt
+  order             Order          @relation(fields: [orderId], references: [id])
+}
+
+enum UserStatus {
+  PENDING
+  ACTIVE
+  SUSPENDED
+}
+
+enum OrderStatus {
+  PENDING_PAYMENT
+  PAID
+  PREPARING
+  SHIPPED
+  CUSTOMS
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  STRIPE
+  TT_WIRE
+}
+
+enum PaymentStatus {
+  UNPAID
+  PENDING_VERIFICATION
+  PAID
+}
+
+enum ShipmentStatus {
+  PREPARING
+  SHIPPED
+  IN_CUSTOMS
+  DELIVERED
+}
