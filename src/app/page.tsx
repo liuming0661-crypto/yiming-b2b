@@ -8,6 +8,7 @@ import type { Product, PaginatedResponse } from '@/lib/shared'
 import { formatUsd } from '@/lib/shared'
 import { useAuth } from '@/contexts/auth-context'
 import { useLang } from '@/contexts/language-context'
+import { WishlistButton } from '@/components/wishlist-button'
 
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_APP_ID!,
@@ -222,6 +223,10 @@ function ProductCard({ product: p }: { product: Product }) {
   const displayName = pickName(p.nameEn, p.nameAr, p.nameZh, lang)
 
   return (
+    <div className="relative">
+      <div className="absolute top-2 right-2 z-10">
+        <WishlistButton productId={p.id} />
+      </div>
     <Link href={`/products/${p.id}`} className="group block bg-white rounded-2xl border border-stone-200 overflow-hidden hover:shadow-md hover:border-stone-300 transition-all duration-200">
       <div className="aspect-square relative overflow-hidden bg-stone-50">
         <Image src={img} alt={displayName} fill className="object-cover group-hover:scale-105 transition-transform duration-500" unoptimized />
@@ -237,5 +242,6 @@ function ProductCard({ product: p }: { product: Product }) {
         </div>
       </div>
     </Link>
+    </div>
   )
 }

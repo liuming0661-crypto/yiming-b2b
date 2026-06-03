@@ -10,6 +10,8 @@ import { api } from '@/lib/api'
 import { formatUsd, getPriceForQty, calcSubtotal } from '@/lib/shared'
 import type { Product, PaginatedResponse } from '@/lib/shared'
 import { InquiryModal } from '@/components/inquiry-modal'
+import { WishlistButton } from '@/components/wishlist-button'
+import { PaymentGuide } from '@/components/payment-guide'
 
 export default function ProductDetailPage() {
   const { id } = useParams<{ id: string }>()
@@ -130,7 +132,10 @@ export default function ProductDetailPage() {
           </div>
 
           <div className="flex flex-col">
-            <p className="text-xs text-gray-400 font-mono mb-2">{t.product.sku}: {product.sku}</p>
+            <div className="flex items-start justify-between mb-2">
+              <p className="text-xs text-gray-400 font-mono">{t.product.sku}: {product.sku}</p>
+              <WishlistButton productId={product.id} />
+            </div>
             <h1 className="text-2xl font-bold text-gray-900 mb-6 leading-snug">{pickName(product.nameEn, product.nameAr, product.nameZh)}</h1>
 
             <div className="bg-gray-50 rounded-2xl p-5 mb-6 border border-gray-100">
@@ -163,9 +168,12 @@ export default function ProductDetailPage() {
               </div>
             </div>
 
-            <div className="flex justify-between items-center py-4 border-t border-gray-100 mb-5">
+            <div className="flex justify-between items-center py-4 border-t border-gray-100 mb-3">
               <span className="text-sm text-gray-500">{formatUsd(unitPrice)}{t.product.perPc} × {quantity} {t.product.pcs}</span>
               <span className="text-2xl font-black text-gray-900">{formatUsd(subtotal)}</span>
+            </div>
+            <div className="flex justify-end mb-2">
+              <PaymentGuide />
             </div>
 
             <button onClick={addToCart} disabled={adding}

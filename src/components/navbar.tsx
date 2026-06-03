@@ -5,6 +5,7 @@ import { useAuth } from '@/contexts/auth-context'
 import { useLang } from '@/contexts/language-context'
 import { LANG_LABELS, type Lang } from '@/lib/i18n'
 import { useCart } from '@/contexts/cart-context'
+import { useWishlist } from '@/hooks/use-wishlist'
 import { useState, useEffect, useRef, Suspense } from 'react'
 
 function SearchBar() {
@@ -62,6 +63,7 @@ export function Navbar() {
   const { user, logout } = useAuth()
   const { lang, setLang, t } = useLang()
   const { count: cartCount } = useCart()
+  const { count: wishlistCount } = useWishlist()
   const router = useRouter()
   const [loggingOut, setLoggingOut] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -132,6 +134,18 @@ export function Navbar() {
               </div>
             )}
           </div>
+
+          {/* Wishlist icon — always visible */}
+          <Link href="/wishlist" className="relative p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors" title="Saved">
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+            {wishlistCount > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 min-w-[16px] h-4 px-0.5 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center leading-none">
+                {wishlistCount > 99 ? '99+' : wishlistCount}
+              </span>
+            )}
+          </Link>
 
           {user ? (
             <>
