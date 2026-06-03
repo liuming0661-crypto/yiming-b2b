@@ -9,6 +9,7 @@ import { useCart } from '@/contexts/cart-context'
 import { api } from '@/lib/api'
 import { formatUsd, getPriceForQty, calcSubtotal } from '@/lib/shared'
 import type { Product, PaginatedResponse } from '@/lib/shared'
+import { InquiryModal } from '@/components/inquiry-modal'
 
 export default function ProductDetailPage() {
   const { id } = useParams<{ id: string }>()
@@ -28,6 +29,7 @@ export default function ProductDetailPage() {
   const [adding, setAdding] = useState(false)
   const [addedMsg, setAddedMsg] = useState('')
   const [fetchError, setFetchError] = useState(false)
+  const [showInquiry, setShowInquiry] = useState(false)
 
   useEffect(() => {
     const controller = new AbortController()
@@ -178,10 +180,27 @@ export default function ProductDetailPage() {
             )}
 
             {!user && (
-              <p className="text-center text-xs text-gray-400 mt-3">
-                <Link href="/register" className="text-gray-700 underline hover:no-underline">{t.product.createAccount}</Link>
-                {' '}{t.product.toPlaceOrder}
-              </p>
+              <>
+                <button
+                  onClick={() => setShowInquiry(true)}
+                  className="w-full py-3 mt-3 rounded-full border-2 border-gray-900 text-gray-900 font-semibold text-sm hover:bg-gray-50 transition-colors"
+                >
+                  {t.inquiry?.button ?? 'Request a Quote'}
+                </button>
+                <p className="text-center text-xs text-gray-400 mt-3">
+                  <Link href="/register" className="text-gray-700 underline hover:no-underline">{t.product.createAccount}</Link>
+                  {' '}{t.product.toPlaceOrder}
+                </p>
+              </>
+            )}
+
+            {showInquiry && (
+              <InquiryModal
+                productId={product.id}
+                productName={pickName(product.nameEn, product.nameAr, product.nameZh)}
+                defaultQty={quantity}
+                onClose={() => setShowInquiry(false)}
+              />
             )}
 
             {(product.descEn || product.descZh) && (

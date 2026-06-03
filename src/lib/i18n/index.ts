@@ -221,6 +221,25 @@ const en = {
     message: 'The page you are looking for does not exist or has been moved.',
     back: 'Back to Products',
   },
+  whatsapp: {
+    chat: 'Chat on WhatsApp',
+  },
+  inquiry: {
+    button: 'Request a Quote',
+    title: 'Request a Quote',
+    name: 'Your Name',
+    email: 'Email Address',
+    country: 'Country',
+    quantity: 'Quantity (pcs)',
+    message: 'Message (optional)',
+    messagePlaceholder: 'Customization, packaging requirements…',
+    submit: 'Send Inquiry',
+    sending: 'Sending…',
+    successTitle: 'Inquiry Sent!',
+    successMsg: "We'll reply to your email within 24 hours.",
+    close: 'Close',
+    errorMsg: 'Something went wrong, please try again.',
+  },
 }
 
 const zhCN: typeof en = {
@@ -429,6 +448,25 @@ const zhCN: typeof en = {
     message: '您访问的页面不存在或已被移动。',
     back: '返回商品列表',
   },
+  whatsapp: {
+    chat: 'WhatsApp 咨询',
+  },
+  inquiry: {
+    button: '询价',
+    title: '申请报价',
+    name: '您的姓名',
+    email: '邮箱地址',
+    country: '国家/地区',
+    quantity: '数量（件）',
+    message: '留言（选填）',
+    messagePlaceholder: '定制要求、包装需求…',
+    submit: '发送询价',
+    sending: '发送中…',
+    successTitle: '询价已提交！',
+    successMsg: '我们将在 24 小时内回复您的邮件。',
+    close: '关闭',
+    errorMsg: '提交失败，请重试。',
+  },
 }
 
 const zhTW: typeof en = {
@@ -636,6 +674,25 @@ const zhTW: typeof en = {
     title: '頁面不存在',
     message: '您存取的頁面不存在或已被移動。',
     back: '返回商品列表',
+  },
+  whatsapp: {
+    chat: 'WhatsApp 諮詢',
+  },
+  inquiry: {
+    button: '詢價',
+    title: '申請報價',
+    name: '您的姓名',
+    email: '電子郵件',
+    country: '國家/地區',
+    quantity: '數量（件）',
+    message: '留言（選填）',
+    messagePlaceholder: '客製化需求、包裝要求…',
+    submit: '發送詢價',
+    sending: '發送中…',
+    successTitle: '詢價已送出！',
+    successMsg: '我們將在 24 小時內回覆您的郵件。',
+    close: '關閉',
+    errorMsg: '提交失敗，請重試。',
   },
 }
 

@@ -149,6 +149,19 @@ model Shipment {
   order             Order          @relation(fields: [orderId], references: [id])
 }
 
+model Inquiry {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  country     String?
+  productId   String?
+  productName String?
+  quantity    Int?
+  message     String?
+  createdAt   DateTime @default(now())
+  read        Boolean  @default(false)
+}
+
 enum UserStatus {
   PENDING
   ACTIVE
